@@ -15,7 +15,7 @@ let player2 = {
   id: "p2"
 };
 
-var playerId1, playerId2;
+var playerId1, playerId2, playerId;
 /**
  * Extract function calls from buttons in html page
  * Use event listeners instead
@@ -77,7 +77,7 @@ function rollConditions(player) {
     document.getElementById(player.id + "-total-pts").innerHTML = 0;
     console.log("Ooops, snake eyes ");
     // swap player
-    reset();
+    reset(player.id);
 
     if (player.id == "p1") {
       swapPlayer("p1", "p2");
@@ -102,7 +102,7 @@ function rollConditions(player) {
     document.getElementById(player.id + "-total-pts").innerHTML =
       player.totalPoints;
     // swap player
-    reset();
+    reset(player.id);
     if (player.id == "p1") {
       swapPlayer("p1", "p2");
     } else {
@@ -154,7 +154,7 @@ function hold(player) {
  * @param {*} playerId2 in-active player
  */
 function swapPlayer(playerId1, playerId2) {
-  document.getElementById(playerId1 + "-header").classList.remove("active"); // RETURNING NULL, WHY?!!?
+  document.getElementById(playerId1 + "-header").classList.remove("active");
   document.getElementById(playerId2 + "-header").classList.add("active");
   document.getElementById(playerId1 + "-roll").disabled = true;
   document.getElementById(playerId1 + "-hold").disabled = true;
@@ -163,9 +163,9 @@ function swapPlayer(playerId1, playerId2) {
   document.getElementById(playerId2 + "-hold").disabled = false;
 }
 
-function reset() {
-  document.getElementById("p1-acc-pts").innerHTML = 0;
-  document.getElementById("p1-roll-sum").innerHTML = 0;
+function reset(playerId) {
+  document.getElementById(playerId1 + "-acc-pts").innerHTML = 0;
+  document.getElementById(playerId1 + "-roll-sum").innerHTML = 0;
 }
 
 /**
