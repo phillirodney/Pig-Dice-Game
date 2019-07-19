@@ -7,7 +7,10 @@
   </head>
 
   <body>
-    <h1>Pig Dice Game, 2 Dice</h1>
+      <div class="game-title">
+    <h1>Pig Dice Game, 2 Dice</h1> 
+    <button onclick="location.reload();"> Start New Game </button>
+</div>
 
     <!-- Instructions -->
     <h2>Instructions</h2>
@@ -25,6 +28,7 @@
     </ul>
 
     <!-- Game Section  -->
+    <div class="players-section">
     <!-- Player 1 Section  -->
     <div id="p1-window">
       <div id="p1-header" class="active">
@@ -73,8 +77,7 @@
       </div>
     </div>
     <br>
-    <button onclick="location.reload();"> Start New Game </button>
-
+</div>
     <!-- JS Code  -->
     <script src="main.js"></script>
 

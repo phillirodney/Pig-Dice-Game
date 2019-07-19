@@ -47,20 +47,6 @@ function playerRoll(player) {
   rollConditions(player);
 }
 
-// function player1Roll() {
-//   /**
-//    * Player 1 rolls 2 dice, generate random numbers
-//    * Round up using Math.ceil
-//    */
-//   dice1 = Math.ceil(Math.random() * 6);
-//   dice2 = Math.ceil(Math.random() * 6);
-//   // calcualte the sum of the rolled dice
-//   rollSum = dice1 + dice2;
-//   // show sum of rolled dice in UI
-//   document.getElementById("p1-roll-sum").innerHTML = rollSum;
-//   rollConditions();
-// }
-
 function rollConditions(player) {
   /**
    * if snake eyes
@@ -84,8 +70,6 @@ function rollConditions(player) {
     } else {
       swapPlayer("p2", "p1");
     }
-
-    // swapPlayer(playerId1, playerId2);
   } else if (dice1 == 1 || dice2 == 1) {
     /**
      * if a 1 is rolled
@@ -98,17 +82,19 @@ function rollConditions(player) {
     document.getElementById(player.id + "-acc-pts").innerHTML =
       player.accumPoints;
     console.log("Ooops, you rolled a 1 ");
+    console.log(player.accumPoints);
+    console.log(player.totalPoints);
     player.totalPoints += player1.accumPoints;
     document.getElementById(player.id + "-total-pts").innerHTML =
       player.totalPoints;
     // swap player
+    checkWinner(player);
     reset(player.id);
     if (player.id == "p1") {
       swapPlayer("p1", "p2");
     } else {
       swapPlayer("p2", "p1");
     }
-    //  swapPlayer(playerId1, playerId2);
   } else {
     player.accumPoints += rollSum;
     document.getElementById(player.id + "-acc-pts").innerHTML =
@@ -127,6 +113,16 @@ function hold(player) {
    * else clear accum and roll values to 0
    * continue playing with next player (TBC)
    */
+  checkWinner(player);
+  //swap player
+  if (player.id == "p1") {
+    swapPlayer("p1", "p2");
+  } else {
+    swapPlayer("p2", "p1");
+  }
+}
+
+function checkWinner(player) {
   if (player.totalPoints >= 100) {
     alert(player.id + " wins!");
     location.reload();
@@ -134,17 +130,8 @@ function hold(player) {
     player.accumPoints = 0;
     document.getElementById(player.id + "-acc-pts").innerHTML = 0;
     document.getElementById(player.id + "-roll-sum").innerHTML = 0;
-
-    //swap player
-    //  swapPlayer();
-    if (player.id == "p1") {
-      swapPlayer("p1", "p2");
-    } else {
-      swapPlayer("p2", "p1");
-    }
   }
 }
-
 /**
  * Create an if statement to assign player id to playerId1 and
  * Pass through two player ID's
@@ -164,8 +151,8 @@ function swapPlayer(playerId1, playerId2) {
 }
 
 function reset(playerId) {
-  document.getElementById(playerId1 + "-acc-pts").innerHTML = 0;
-  document.getElementById(playerId1 + "-roll-sum").innerHTML = 0;
+  document.getElementById(playerId + "-acc-pts").innerHTML = 0;
+  document.getElementById(playerId + "-roll-sum").innerHTML = 0;
 }
 
 /**
