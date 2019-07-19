@@ -14,15 +14,13 @@ let player2 = {
   totalPoints: 0,
   id: "p2"
 };
-
+// prevent innerHTML elements from being null
 var playerId1, playerId2, playerId;
 /**
  * Extract function calls from buttons in html page
  * Use event listeners instead
  * Allows us to leave html page as is, and change functionlity in JS code
  */
-
-// document.getElementById("p1-roll").addEventListener("click", player1Roll);
 document.getElementById("p1-roll").addEventListener("click", function() {
   playerRoll(player1);
 });
@@ -61,7 +59,6 @@ function rollConditions(player) {
     document.getElementById(player.id + "-acc-pts").innerHTML =
       player.accumPoints;
     document.getElementById(player.id + "-total-pts").innerHTML = 0;
-    console.log("Ooops, snake eyes ");
     // swap player
     reset(player.id);
 
@@ -77,13 +74,10 @@ function rollConditions(player) {
     player.accumPoints += rollSum;
     document.getElementById(player.id + "-acc-pts").innerHTML =
       player.accumPoints;
-    console.log("Ooops, you rolled a 1 ");
-    console.log(player.accumPoints);
-    console.log(player.totalPoints);
     player.totalPoints += player1.accumPoints;
     document.getElementById(player.id + "-total-pts").innerHTML =
       player.totalPoints;
-    // swap player
+    // check winner, reset,  swap player
     checkWinner(player);
     reset(player.id);
     preSwapCheck(player);
@@ -91,7 +85,6 @@ function rollConditions(player) {
     player.accumPoints += rollSum;
     document.getElementById(player.id + "-acc-pts").innerHTML =
       player.accumPoints;
-    console.log(dice1, dice2, rollSum);
   }
 }
 function hold(player) {
@@ -110,6 +103,11 @@ function hold(player) {
   preSwapCheck(player);
 }
 
+/**
+ * check for a winner when
+ * plasyers swapped
+ * when hold button is pressed
+ */
 function checkWinner(player) {
   if (player.totalPoints >= 100) {
     alert(player.id + " wins!");
@@ -121,6 +119,11 @@ function checkWinner(player) {
   }
 }
 
+/**
+ * Who is the active player?
+ * Swap appropriately
+ * @param {*} player
+ */
 function preSwapCheck(player) {
   if (player.id == "p1") {
     swapPlayer("p1", "p2");
@@ -128,8 +131,9 @@ function preSwapCheck(player) {
     swapPlayer("p2", "p1");
   }
 }
+
 /**
- * Create an if statement to assign player id to playerId1 and
+ * Create an if statement to assign player id to playerId1 and playerId2
  * Pass through two player ID's
  * If player 1 swap to player 2
  * If player 2 swap to player 1
