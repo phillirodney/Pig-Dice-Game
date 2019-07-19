@@ -1,6 +1,3 @@
-var accumPoints = 0;
-var totalPoints = 0;
-
 /**
  * Each player will have these variables , create player object
  */
@@ -9,6 +6,13 @@ let player1 = {
   accumPoints: 0,
   totalPoints: 0
 };
+
+let player2 = {
+  rollSum: 0,
+  accumPoints: 0,
+  totalPoints: 0
+};
+
 document.getElementById("p1-header").classList.add("active");
 
 function player1Roll() {
@@ -54,7 +58,7 @@ function rollConditions() {
     player1.accumPoints += rollSum;
     document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
     console.log("Ooops, you rolled a 1 ");
-    totalPoints += accumPoints;
+    player1.totalPoints += player1.accumPoints;
     document.getElementById("p1-total-pts").innerHTML = player1.totalPoints;
     // swap player
     reset();
@@ -75,7 +79,7 @@ function hold() {
    * else clear accum and roll values to 0
    * continue playing with next player (TBC)
    */
-  if (totalPoints >= 100) {
+  if (player1.totalPoints >= 100) {
     alert("Player 1 wins!");
     location.reload();
   } else {
