@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pig - 2 Dice Rolling Game</title>
+  </head>
+
+  <body>
+    <h1>Pig Dice Game, 2 Dice</h1>
+
+    <!-- Instructions -->
+    <h2>Instructions</h2>
+    <p><strong>Goal:</strong> Be the first to 100 points.</p>
+    <p><strong>Rules</strong>:</p>
+    <ul>
+      <li>
+        <strong>ROLL</strong>: Add roll number to current turn points. Roll of
+        "1" ends turn and forfeits turn points.
+      </li>
+      <li>
+        <strong>HOLD</strong>: Ends turn and adds turn points to total game
+        points.
+      </li>
+    </ul>
+
+    <!-- Game Section  -->
+    <!-- Player 1 Section  -->
+    <div id="p1-window">
+      <div id="p1-header" class="active">
+        <p>
+          <strong>Player 1 Total Points </strong>
+        </p>
+      </div>
+      <div>
+        <p>Score this turn</p>
+      </div>
+      <div>
+        <p>Total Score</p>
+        <button id="p1-roll" type="button" onclick="player1Roll()">
+          Roll Dice
+        </button>
+        <button id="p1-hold" type="button">Hold</button>
+      </div>
+    </div>
+
+    <!-- Player 2 Section  -->
+    <div id="p2-window">
+      <div id="p2-header">
+        <p>
+          <strong>Player 2 Section</strong>
+        </p>
+      </div>
+      <div>
+        <p>Score this turn</p>
+      </div>
+      <div>
+        <p>Total Score</p>
+        <button id="p2-roll" type="button">
+          Player 2, Roll Dice
+        </button>
+        <button id="p2-hold" type="button">
+          Hold
+        </button>
+      </div>
+    </div>
+
+    <!-- JS Code  -->
+    <script src="main.js"></script>
+  </body>
+</html>
