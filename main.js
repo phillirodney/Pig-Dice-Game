@@ -62,12 +62,22 @@ function hold() {
   totalPoints += accumPoints;
   document.getElementById("p1-total-pts").innerHTML = totalPoints;
   // reset accum points to 0, show changes in UI
-  accumPoints = 0;
-  document.getElementById("p1-acc-pts").innerHTML = 0;
-  document.getElementById("p1-roll-sum").innerHTML = 0;
+  /**
+   * if winner, stop game
+   * else clear accum and roll values to 0
+   * continue playing with next player (TBC)
+   */
+  if (totalPoints >= 100) {
+    alert("Player 1 wins!");
+    location.reload();
+  } else {
+    accumPoints = 0;
+    document.getElementById("p1-acc-pts").innerHTML = 0;
+    document.getElementById("p1-roll-sum").innerHTML = 0;
 
-  //swap player
-  swapPlayer();
+    //swap player
+    swapPlayer();
+  }
 }
 
 function swapPlayer() {
@@ -83,3 +93,8 @@ function reset() {
   document.getElementById("p1-acc-pts").innerHTML = 0;
   document.getElementById("p1-roll-sum").innerHTML = 0;
 }
+
+/**
+ * Function needs to be in hold button, only time to check values before next players turn
+ */
+function win() {}
