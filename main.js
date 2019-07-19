@@ -4,13 +4,15 @@
 let player1 = {
   rollSum: 0,
   accumPoints: 0,
-  totalPoints: 0
+  totalPoints: 0,
+  id: "p1"
 };
 
 let player2 = {
   rollSum: 0,
   accumPoints: 0,
-  totalPoints: 0
+  totalPoints: 0,
+  id: "p2"
 };
 
 /**
@@ -19,26 +21,46 @@ let player2 = {
  * Allows us to leave html page as is, and change functionlity in JS code
  */
 
-document.getElementById("p1-roll").addEventListener("click", player1Roll);
-document.getElementById("p1-hold").addEventListener("click", hold);
+// document.getElementById("p1-roll").addEventListener("click", player1Roll);
+document.getElementById("p1-roll").addEventListener("click", function() {
+  playerRoll(player1);
+});
+document.getElementById("p2-roll").addEventListener("click", function() {
+  playerRoll(player2);
+});
 
-function playerRoll(player) {}
-function player1Roll() {
-  /**
-   * Player 1 rolls 2 dice, generate random numbers
-   * Round up using Math.ceil
-   */
+document.getElementById("p1-hold").addEventListener("click", function() {
+  hold(player1);
+});
+document.getElementById("p2-hold").addEventListener("click", function() {
+  hold(player2);
+});
+
+function playerRoll(player) {
   dice1 = Math.ceil(Math.random() * 6);
   dice2 = Math.ceil(Math.random() * 6);
   // calcualte the sum of the rolled dice
   rollSum = dice1 + dice2;
   // show sum of rolled dice in UI
-  document.getElementById("p1-roll-sum").innerHTML = rollSum;
-  rollConditions();
+  document.getElementById(player.id + "-roll-sum").innerHTML = rollSum;
+  rollConditions(player);
 }
 
-function player2Roll() {}
-function rollConditions() {
+// function player1Roll() {
+//   /**
+//    * Player 1 rolls 2 dice, generate random numbers
+//    * Round up using Math.ceil
+//    */
+//   dice1 = Math.ceil(Math.random() * 6);
+//   dice2 = Math.ceil(Math.random() * 6);
+//   // calcualte the sum of the rolled dice
+//   rollSum = dice1 + dice2;
+//   // show sum of rolled dice in UI
+//   document.getElementById("p1-roll-sum").innerHTML = rollSum;
+//   rollConditions();
+// }
+
+function rollConditions(player) {
   /**
    * if snake eyes
    * lose turn
@@ -47,10 +69,11 @@ function rollConditions() {
    * show values in UI
    */
   if (dice1 == 1 && dice2 == 1) {
-    player1.rollSum = 0;
-    player1.accumPoints = 0;
-    document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
-    document.getElementById("p1-total-pts").innerHTML = 0;
+    player.rollSum = 0;
+    player.accumPoints = 0;
+    document.getElementById(player.id + "-acc-pts").innerHTML =
+      player.accumPoints;
+    document.getElementById(player.id + "-total-pts").innerHTML = 0;
     console.log("Ooops, snake eyes ");
     // swap player
     reset();
@@ -62,38 +85,42 @@ function rollConditions() {
      * accumulated points unchaged
      * show values in UI
      */
-    player1.rollSum = 0;
-    player1.accumPoints += rollSum;
-    document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
+    player.rollSum = 0;
+    player.accumPoints += rollSum;
+    document.getElementById(player.id + "-acc-pts").innerHTML =
+      player.accumPoints;
     console.log("Ooops, you rolled a 1 ");
-    player1.totalPoints += player1.accumPoints;
-    document.getElementById("p1-total-pts").innerHTML = player1.totalPoints;
+    player.totalPoints += player1.accumPoints;
+    document.getElementById(player.id + "-total-pts").innerHTML =
+      player.totalPoints;
     // swap player
     reset();
     swapPlayer();
   } else {
-    player1.accumPoints += rollSum;
-    document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
+    player.accumPoints += rollSum;
+    document.getElementById(player.id + "-acc-pts").innerHTML =
+      player.accumPoints;
     console.log(dice1, dice2, rollSum);
   }
 }
-function hold() {
+function hold(player) {
   // add accumulated points to total points for players round
-  player1.totalPoints += player1.accumPoints;
-  document.getElementById("p1-total-pts").innerHTML = player1.totalPoints;
+  player.totalPoints += player.accumPoints;
+  document.getElementById(player.id + "-total-pts").innerHTML =
+    player.totalPoints;
   // reset accum points to 0, show changes in UI
   /**
    * if winner, stop game
    * else clear accum and roll values to 0
    * continue playing with next player (TBC)
    */
-  if (player1.totalPoints >= 100) {
+  if (player.totalPoints >= 100) {
     alert("Player 1 wins!");
     location.reload();
   } else {
-    player1.accumPoints = 0;
-    document.getElementById("p1-acc-pts").innerHTML = 0;
-    document.getElementById("p1-roll-sum").innerHTML = 0;
+    player.accumPoints = 0;
+    document.getElementById(player.id + "-acc-pts").innerHTML = 0;
+    document.getElementById(player.id + "-roll-sum").innerHTML = 0;
 
     //swap player
     swapPlayer();
