@@ -15,6 +15,7 @@ let player2 = {
   id: "p2"
 };
 
+var playerId1, playerId2;
 /**
  * Extract function calls from buttons in html page
  * Use event listeners instead
@@ -77,7 +78,14 @@ function rollConditions(player) {
     console.log("Ooops, snake eyes ");
     // swap player
     reset();
-    swapPlayer();
+
+    if (player.id == "p1") {
+      swapPlayer("p1", "p2");
+    } else {
+      swapPlayer("p2", "p1");
+    }
+
+    // swapPlayer(playerId1, playerId2);
   } else if (dice1 == 1 || dice2 == 1) {
     /**
      * if a 1 is rolled
@@ -95,7 +103,12 @@ function rollConditions(player) {
       player.totalPoints;
     // swap player
     reset();
-    swapPlayer();
+    if (player.id == "p1") {
+      swapPlayer("p1", "p2");
+    } else {
+      swapPlayer("p2", "p1");
+    }
+    //  swapPlayer(playerId1, playerId2);
   } else {
     player.accumPoints += rollSum;
     document.getElementById(player.id + "-acc-pts").innerHTML =
@@ -115,7 +128,7 @@ function hold(player) {
    * continue playing with next player (TBC)
    */
   if (player.totalPoints >= 100) {
-    alert("Player 1 wins!");
+    alert(player.id + " wins!");
     location.reload();
   } else {
     player.accumPoints = 0;
@@ -123,19 +136,33 @@ function hold(player) {
     document.getElementById(player.id + "-roll-sum").innerHTML = 0;
 
     //swap player
-    swapPlayer();
+    //  swapPlayer();
+    if (player.id == "p1") {
+      swapPlayer("p1", "p2");
+    } else {
+      swapPlayer("p2", "p1");
+    }
   }
 }
 
-function swapPlayer() {
-  document.getElementById("p1-header").classList.remove("active");
-  document.getElementById("p2-header").classList.add("active");
-  document.getElementById("p1-roll").disabled = true;
-  document.getElementById("p1-hold").disabled = true;
+/**
+ * Create an if statement to assign player id to playerId1 and
+ * Pass through two player ID's
+ * If player 1 swap to player 2
+ * If player 2 swap to player 1
+ * @param {*} playerId1 active player
+ * @param {*} playerId2 in-active player
+ */
+function swapPlayer(playerId1, playerId2) {
+  document.getElementById(playerId1 + "-header").classList.remove("active"); // RETURNING NULL, WHY?!!?
+  document.getElementById(playerId2 + "-header").classList.add("active");
+  document.getElementById(playerId1 + "-roll").disabled = true;
+  document.getElementById(playerId1 + "-hold").disabled = true;
 
-  document.getElementById("p2-roll").disabled = false;
-  document.getElementById("p2-hold").disabled = false;
+  document.getElementById(playerId2 + "-roll").disabled = false;
+  document.getElementById(playerId2 + "-hold").disabled = false;
 }
+
 function reset() {
   document.getElementById("p1-acc-pts").innerHTML = 0;
   document.getElementById("p1-roll-sum").innerHTML = 0;
