@@ -1,4 +1,5 @@
 var accumPoints = 0;
+var totalPoints = 0;
 
 document.getElementById("p1-header").classList.add("active");
 
@@ -51,7 +52,15 @@ function rollConditions() {
     console.log(dice1, dice2, rollSum);
   }
 }
-function hold() {}
+function hold() {
+  // add accumulated points to total points for players round
+  totalPoints += accumPoints;
+  document.getElementById("p1-total-pts").innerHTML = totalPoints;
+  // reset accum points to 0, show changes in UI
+  rollSum = 0;
+  accumPoints = 0;
+  document.getElementById("p1-acc-pts").innerHTML = accumPoints;
+}
 function swapPlayer() {
   document.getElementById("p1-header").classList.remove("active");
   document.getElementById("p2-header").classList.add("active");

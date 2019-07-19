@@ -30,6 +30,7 @@
       <div id="p1-header" class="active">
         <p>
           <strong>Player 1 Total Points </strong>
+          <p id="p1-total-pts"></p>
         </p>
       </div>
       <div>
@@ -37,12 +38,12 @@
         <p id="p1-roll-sum"></p>
       </div>
       <div>
-        <p>Total Score</p>
+        <p>Round Score</p>
         <p id="p1-acc-pts"></p>
         <button id="p1-roll" type="button" onclick="player1Roll()">
           Roll Dice
         </button>
-        <button id="p1-hold" type="button">Hold</button>
+        <button id="p1-hold" type="button" onclick="hold()">Hold</button>
       </div>
     </div>
 
@@ -58,10 +59,10 @@
       </div>
       <div>
         <p>Total Score</p>
-        <button id="p2-roll" type="button">
+        <button id="p2-roll" type="button" disabled>
           Player 2, Roll Dice
         </button>
-        <button id="p2-hold" type="button">
+        <button id="p2-hold" type="button" disabled>
           Hold
         </button>
       </div>
