@@ -1,6 +1,14 @@
 var accumPoints = 0;
 var totalPoints = 0;
 
+/**
+ * Each player will have these variables , create player object
+ */
+let player1 = {
+  rollSum: 0,
+  accumPoints: 0,
+  totalPoints: 0
+};
 document.getElementById("p1-header").classList.add("active");
 
 function player1Roll() {
@@ -27,9 +35,9 @@ function rollConditions() {
    * show values in UI
    */
   if (dice1 == 1 && dice2 == 1) {
-    rollSum = 0;
-    accumPoints = 0;
-    document.getElementById("p1-acc-pts").innerHTML = accumPoints;
+    player1.rollSum = 0;
+    player1.accumPoints = 0;
+    document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
     document.getElementById("p1-total-pts").innerHTML = 0;
     console.log("Ooops, snake eyes ");
     // swap player
@@ -42,25 +50,25 @@ function rollConditions() {
      * accumulated points unchaged
      * show values in UI
      */
-    rollSum = 0;
-    accumPoints += rollSum;
-    document.getElementById("p1-acc-pts").innerHTML = accumPoints;
+    player1.rollSum = 0;
+    player1.accumPoints += rollSum;
+    document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
     console.log("Ooops, you rolled a 1 ");
     totalPoints += accumPoints;
-    document.getElementById("p1-total-pts").innerHTML = totalPoints;
+    document.getElementById("p1-total-pts").innerHTML = player1.totalPoints;
     // swap player
     reset();
     swapPlayer();
   } else {
-    accumPoints += rollSum;
-    document.getElementById("p1-acc-pts").innerHTML = accumPoints;
+    player1.accumPoints += rollSum;
+    document.getElementById("p1-acc-pts").innerHTML = player1.accumPoints;
     console.log(dice1, dice2, rollSum);
   }
 }
 function hold() {
   // add accumulated points to total points for players round
-  totalPoints += accumPoints;
-  document.getElementById("p1-total-pts").innerHTML = totalPoints;
+  player1.totalPoints += player1.accumPoints;
+  document.getElementById("p1-total-pts").innerHTML = player1.totalPoints;
   // reset accum points to 0, show changes in UI
   /**
    * if winner, stop game
@@ -71,7 +79,7 @@ function hold() {
     alert("Player 1 wins!");
     location.reload();
   } else {
-    accumPoints = 0;
+    player1.accumPoints = 0;
     document.getElementById("p1-acc-pts").innerHTML = 0;
     document.getElementById("p1-roll-sum").innerHTML = 0;
 
