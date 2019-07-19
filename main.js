@@ -65,11 +65,7 @@ function rollConditions(player) {
     // swap player
     reset(player.id);
 
-    if (player.id == "p1") {
-      swapPlayer("p1", "p2");
-    } else {
-      swapPlayer("p2", "p1");
-    }
+    preSwapCheck(player);
   } else if (dice1 == 1 || dice2 == 1) {
     /**
      * if a 1 is rolled
@@ -90,11 +86,7 @@ function rollConditions(player) {
     // swap player
     checkWinner(player);
     reset(player.id);
-    if (player.id == "p1") {
-      swapPlayer("p1", "p2");
-    } else {
-      swapPlayer("p2", "p1");
-    }
+    preSwapCheck(player);
   } else {
     player.accumPoints += rollSum;
     document.getElementById(player.id + "-acc-pts").innerHTML =
@@ -115,11 +107,7 @@ function hold(player) {
    */
   checkWinner(player);
   //swap player
-  if (player.id == "p1") {
-    swapPlayer("p1", "p2");
-  } else {
-    swapPlayer("p2", "p1");
-  }
+  preSwapCheck(player);
 }
 
 function checkWinner(player) {
@@ -130,6 +118,14 @@ function checkWinner(player) {
     player.accumPoints = 0;
     document.getElementById(player.id + "-acc-pts").innerHTML = 0;
     document.getElementById(player.id + "-roll-sum").innerHTML = 0;
+  }
+}
+
+function preSwapCheck(player) {
+  if (player.id == "p1") {
+    swapPlayer("p1", "p2");
+  } else {
+    swapPlayer("p2", "p1");
   }
 }
 /**
