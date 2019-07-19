@@ -30,8 +30,10 @@ function rollConditions() {
     rollSum = 0;
     accumPoints = 0;
     document.getElementById("p1-acc-pts").innerHTML = accumPoints;
+    document.getElementById("p1-total-pts").innerHTML = 0;
     console.log("Ooops, snake eyes ");
     // swap player
+    reset();
     swapPlayer();
   } else if (dice1 == 1 || dice2 == 1) {
     /**
@@ -44,7 +46,10 @@ function rollConditions() {
     accumPoints += rollSum;
     document.getElementById("p1-acc-pts").innerHTML = accumPoints;
     console.log("Ooops, you rolled a 1 ");
+    totalPoints += accumPoints;
+    document.getElementById("p1-total-pts").innerHTML = totalPoints;
     // swap player
+    reset();
     swapPlayer();
   } else {
     accumPoints += rollSum;
@@ -57,10 +62,14 @@ function hold() {
   totalPoints += accumPoints;
   document.getElementById("p1-total-pts").innerHTML = totalPoints;
   // reset accum points to 0, show changes in UI
-  rollSum = 0;
   accumPoints = 0;
-  document.getElementById("p1-acc-pts").innerHTML = accumPoints;
+  document.getElementById("p1-acc-pts").innerHTML = 0;
+  document.getElementById("p1-roll-sum").innerHTML = 0;
+
+  //swap player
+  swapPlayer();
 }
+
 function swapPlayer() {
   document.getElementById("p1-header").classList.remove("active");
   document.getElementById("p2-header").classList.add("active");
@@ -69,4 +78,8 @@ function swapPlayer() {
 
   document.getElementById("p2-roll").disabled = false;
   document.getElementById("p2-hold").disabled = false;
+}
+function reset() {
+  document.getElementById("p1-acc-pts").innerHTML = 0;
+  document.getElementById("p1-roll-sum").innerHTML = 0;
 }
