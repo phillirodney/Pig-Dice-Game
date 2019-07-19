@@ -1,5 +1,7 @@
 var accumPoints = 0;
 
+document.getElementById("p1-header").classList.add("active");
+
 function player1Roll() {
   /**
    * Player 1 rolls 2 dice, generate random numbers
@@ -28,6 +30,8 @@ function rollConditions() {
     accumPoints = 0;
     document.getElementById("p1-acc-pts").innerHTML = accumPoints;
     console.log("Ooops, snake eyes ");
+    // swap player
+    swapPlayer();
   } else if (dice1 == 1 || dice2 == 1) {
     /**
      * if a 1 is rolled
@@ -39,6 +43,8 @@ function rollConditions() {
     accumPoints += rollSum;
     document.getElementById("p1-acc-pts").innerHTML = accumPoints;
     console.log("Ooops, you rolled a 1 ");
+    // swap player
+    swapPlayer();
   } else {
     accumPoints += rollSum;
     document.getElementById("p1-acc-pts").innerHTML = accumPoints;
@@ -46,4 +52,12 @@ function rollConditions() {
   }
 }
 function hold() {}
-function swapPlayer() {}
+function swapPlayer() {
+  document.getElementById("p1-header").classList.remove("active");
+  document.getElementById("p2-header").classList.add("active");
+  document.getElementById("p1-roll").disabled = true;
+  document.getElementById("p1-hold").disabled = true;
+
+  document.getElementById("p2-roll").disabled = false;
+  document.getElementById("p2-hold").disabled = false;
+}
