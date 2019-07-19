@@ -13,8 +13,16 @@ let player2 = {
   totalPoints: 0
 };
 
-document.getElementById("p1-header").classList.add("active");
+/**
+ * Extract function calls from buttons in html page
+ * Use event listeners instead
+ * Allows us to leave html page as is, and change functionlity in JS code
+ */
 
+document.getElementById("p1-roll").addEventListener("click", player1Roll);
+document.getElementById("p1-hold").addEventListener("click", hold);
+
+function playerRoll(player) {}
 function player1Roll() {
   /**
    * Player 1 rolls 2 dice, generate random numbers
